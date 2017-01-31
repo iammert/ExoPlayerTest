@@ -31,3 +31,16 @@ dependencies {
     compile project(':library')
     //compile 'com.github.iammert:RadioPlayerService:9a0cc8dc94'
 }
+
+task deleteJar(type: Delete){
+    delete 'libs/exotest.jar'
+}
+
+task createJar(type: Copy){
+    from('build/intermediates/bundles/release')
+    into('libs/')
+    include('classes.jar')
+    rename('classes.jar','exotest.jar')
+}
+
+createJar.dependsOn(deleteJar, build)
